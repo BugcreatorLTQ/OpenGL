@@ -6,7 +6,7 @@ template <typename Type>
 class Point
 {
 private:
-	Type ix, iy;
+	Type x, y;
 public:
 	Point();
 	~Point();
@@ -18,7 +18,7 @@ public:
 template <typename Type>
 Point<Type>::Point()
 {
-	ix = iy = 0;
+	x = y = 0;
 }
 
 template <typename Type>
@@ -30,19 +30,19 @@ Point<Type>::~Point()
 template <typename Type>
 void Point<Type>::SetPoint(const Type x, const Type y)
 {
-	this->ix = x;
-	this->iy = y;
+	this->x = x;
+	this->y = y;
 }
 
 template <typename Type>
 Type Point<Type>::X() const
 {
-	return ix;
+	return x;
 }
 
 template <typename Type>
 Type Point<Type>::Y() const
 {
-	return iy;
+	return y;
 }
 #endif
