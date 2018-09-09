@@ -1,10 +1,15 @@
+#include<iostream>
 #include<GL/glut.h>
 #include"Point.h"
+#include"Point2D.h"
+#include"Point3D.h"
 
 namespace LinePoint {
-	Point<GLint> start;
-	Point<GLint> end;
+	Point2D<GLint> start;
+	Point2D<GLint> end;
+	const Point2D<GLint> size(400, 200);
 }
+
 
 void Init()
 {
@@ -15,26 +20,28 @@ void Init()
 
 void Display()
 {
-	using LinePoint::start;
-	using LinePoint::end;
+	using namespace LinePoint;
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1, 1, 1);
-	glBegin(GL_LINES);
-	glVertex2i(start.X(),start.Y());
-	glVertex2i(end.X(),end.Y());
-	glEnd();
+	for (int i = 0; i < 10; i++) {
+		start.SetPoint(size.X()/20*i, 0);
+		end.SetPoint(size.X()/2 - size.X() / 20 * i, size.Y());
+		glBegin(GL_LINES);
+		glVertex2i(start.X(), start.Y());
+		glVertex2i(end.X(), end.Y());
+		glEnd();
+	}
 	glFlush();
 }
 
 int main(int argc, char *argv[])
 {
+	using LinePoint::size;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(400, 300);
-	glutInitWindowPosition(100, 200);
+	glutInitWindowSize(2 * size.X(), 2 * size.Y());
+	glutInitWindowPosition(500, 500);
 	glutCreateWindow("demo");	
-	LinePoint::start.SetPoint(100, 100);
-	LinePoint::end.SetPoint(10, 300);
 	glutDisplayFunc(Display);
 	Init();
 	glutMainLoop();
