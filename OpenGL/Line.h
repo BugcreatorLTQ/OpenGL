@@ -1,7 +1,6 @@
 #ifndef LINE_H
 #define LINE_H
 #include"Point.h"
-#include<GL/glut.h>
 
 template <typename Type>
 class Line
@@ -9,22 +8,19 @@ class Line
 private:
 	Point<Type> start;
 	Point<Type> end;
-	GLint Mod;
 public:
 	Line();
 	virtual ~Line();
 	void SetLine(const Point<Type> & start_point, const Point<Type> & end_point);
 	bool operator==(const Line & other_line) const;
-	void Show() const;
-	void SetMod(GLint mod) { Mod = mod; };
-	GLint GetMod() const { return Mod; };
+	//bool Is   «∑Ò∆Ω––
+	void Show();
 };
 
 
 template <typename Type>
 Line<Type>::Line()
 {
-	Mod = GL_LINE;
 	start.SetPoint();
 	end.SetPoint();
 }
@@ -52,7 +48,7 @@ bool Line<Type>::operator==(const Line & other_line) const
 }
 
 template <typename Type>
-void Line<Type>::Show() const
+void Line<Type>::Show()
 {
 	std::cout << "[(";
 	start.Show();
@@ -60,4 +56,5 @@ void Line<Type>::Show() const
 	end.Show();
 	std::cout << ")]";
 }
+
 #endif

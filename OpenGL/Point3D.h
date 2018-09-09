@@ -19,7 +19,7 @@ public:
 	Point3D operator+(const Point3D & other_point) const;
 	Point3D operator-(const Point3D & other_point) const;
 	Type operator*(const Point3D & other_point) const;
-	void Show() const;
+	void Show();
 };
 
 
@@ -108,7 +108,7 @@ Type Point3D<Type>::operator*(const Point3D<Type> & other_point) const
 }
 
 template <typename Type>
-void Point3D<Type>::Show() const
+void Point3D<Type>::Show()
 {
 	Point2D<Type>::Show();
 	std::cout << ',' << z;

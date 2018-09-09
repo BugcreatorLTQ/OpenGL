@@ -15,7 +15,8 @@ public:
 	~Line2D();
 	void SetLine(const Point2D<Type> & start_point, const Point2D<Type> & end_point);
 	bool operator==(const Line2D & other_line) const;
-	void Show() const;
+	//bool Is   «∑Ò∆Ω––
+	void Show();
 };
 
 
@@ -50,7 +51,7 @@ bool Line2D<Type>::operator==(const Line2D & other_line) const
 
 
 template <typename Type>
-void Line2D<Type>::Show() const
+void Line2D<Type>::Show()
 {
 	std::cout << "[(";
 	start.Show();
@@ -58,5 +59,4 @@ void Line2D<Type>::Show() const
 	end.Show();
 	std::cout << ")]";
 }
-
 #endif
