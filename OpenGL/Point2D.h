@@ -14,11 +14,13 @@ public:
 	void SetPoint(const Type x, const Type y);
 	Type X() const;
 	Type Y() const;
+	bool operator==(const Point2D & other_point) const;
 	Point2D & operator+=(const Point2D & other_point);
 	Point2D & operator-=(const Point2D & other_point);
 	Point2D operator+(const Point2D & other_point) const;
 	Point2D operator-(const Point2D & other_point) const;
 	Type operator*(const Point2D & other_point) const;
+	friend std::ostream & operator<<(std::ostream & os, const Point2D & this_point) ;
 };
 
 template <typename Type>
@@ -59,6 +61,15 @@ Type Point2D<Type>::Y() const
 }
 
 template <typename Type>
+bool Point2D<Type>::operator==(const Point2D<Type> & other_point) const
+{
+	if (x == other_point.x&&y == other_point.y)
+		return true;
+	else
+		return false;
+}
+
+template <typename Type>
 Point2D<Type> & Point2D<Type>::operator+=(const Point2D & other_point)
 {
 	x += other_point.x;
@@ -94,6 +105,13 @@ template <typename Type>
 Type Point2D<Type>::operator*(const Point2D & other_point) const
 {
 	return x * other_point.x + y * other_point.y;
+}
+
+template <typename Type>
+std::ostream & operator<<(std::ostream & os, const Point2D<Type> & this_point)
+{
+	os << this_point.x << ' ' << this_point.y;
+	return os;
 }
 
 #endif
