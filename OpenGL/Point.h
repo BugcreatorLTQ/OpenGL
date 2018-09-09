@@ -15,7 +15,7 @@ public:
 	Point operator+(const Point & other_point)  const { return *this; };
 	Point operator-(const Point & other_point)  const { return *this; };
 	Type operator*(const Point & other_point) const { return Type(0); };
-	void Show() {};
+	void Show() const {};
 };
 
 template <typename Type>

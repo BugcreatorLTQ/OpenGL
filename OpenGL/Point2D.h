@@ -20,7 +20,7 @@ public:
 	Point2D operator+(const Point2D & other_point) const;
 	Point2D operator-(const Point2D & other_point) const;
 	Type operator*(const Point2D & other_point) const;
-	void Show();
+	void Show() const;
 };
 
 template <typename Type>
@@ -108,7 +108,7 @@ Type Point2D<Type>::operator*(const Point2D & other_point) const
 }
 
 template <typename Type>
-void Point2D<Type>::Show()
+void Point2D<Type>::Show() const
 {
 	std::cout << x << "," << y;
 }
