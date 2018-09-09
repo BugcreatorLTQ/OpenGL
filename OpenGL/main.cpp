@@ -4,6 +4,7 @@
 #include"Point2D.h"
 #include"Point3D.h"
 #include"Line.h"
+#include"Line2D.h"
 
 namespace LinePoint {
 	Point2D<GLint> start;

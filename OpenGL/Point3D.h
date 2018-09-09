@@ -11,7 +11,7 @@ public:
 	Point3D();
 	Point3D(const Type x, const Type y, const Type z);
 	~Point3D();
-	void SetPoint(const Type x, const Type y, const Type z);
+	void SetPoint(const Type x = 0, const Type y = 0, const Type z = 0);
 	Type Z() const;
 	bool operator==(const Point3D & other_point) const;
 	Point3D & operator+=(const Point3D & other_point);
@@ -19,7 +19,7 @@ public:
 	Point3D operator+(const Point3D & other_point) const;
 	Point3D operator-(const Point3D & other_point) const;
 	Type operator*(const Point3D & other_point) const;
-	friend std::ostream & operator<<(std::ostream & os, const Point3D & this_point);
+	void Show();
 };
 
 
@@ -108,11 +108,10 @@ Type Point3D<Type>::operator*(const Point3D<Type> & other_point) const
 }
 
 template <typename Type>
-std::ostream & operator<<(std::ostream & os, const Point3D<Type> & this_point)
+void Point3D<Type>::Show()
 {
-	os << (Point2D<Type>) this_point;
-	os << ',' << this_point.z;
-	return os;
+	Point2D::Show();
+	std::cout << ',' << z;
 }
 
 #endif

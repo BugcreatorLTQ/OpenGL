@@ -11,7 +11,7 @@ public:
 	Point2D();
 	Point2D(const Type x, const Type y);
 	~Point2D();
-	void SetPoint(const Type x, const Type y);
+	void SetPoint(const Type x = 0, const Type y = 0);
 	Type X() const;
 	Type Y() const;
 	bool operator==(const Point2D & other_point) const;
@@ -20,7 +20,7 @@ public:
 	Point2D operator+(const Point2D & other_point) const;
 	Point2D operator-(const Point2D & other_point) const;
 	Type operator*(const Point2D & other_point) const;
-	friend std::ostream & operator<<(std::ostream & os, const Point2D & this_point) ;
+	void Show();
 };
 
 template <typename Type>
@@ -108,10 +108,9 @@ Type Point2D<Type>::operator*(const Point2D & other_point) const
 }
 
 template <typename Type>
-std::ostream & operator<<(std::ostream & os, const Point2D<Type> & this_point)
+void Point2D<Type>::Show()
 {
-	os << this_point.x << ' ' << this_point.y;
-	return os;
+	std::cout << x << "," << y;
 }
 
 #endif

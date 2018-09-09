@@ -14,7 +14,7 @@ public:
 	void SetLine(const Point<Type> & start_point, const Point<Type> & end_point);
 	bool operator==(const Line & other_line) const;
 	//bool Is   «∑Ò∆Ω––
-	friend std::ostream & operator<<(std::ostream & os, const Line & this_line);
+	void Show();
 };
 
 
@@ -48,10 +48,13 @@ bool Line<Type>::operator==(const Line & other_line) const
 }
 
 template <typename Type>
-std::ostream & operator<<(std::ostream & os, const Line<Type> & this_line)
+void Line<Type>::Show()
 {
-	os << "[(" << this_line.start << "),(" << this_line.end << ")]";
-	return os;
+	std::cout << "[(";
+	start.Show();
+	std::cout << "),(";
+	end.Show();
+	std::cout << ")]";
 }
 
 #endif
