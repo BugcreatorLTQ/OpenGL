@@ -110,7 +110,7 @@ Type Point3D<Type>::operator*(const Point3D<Type> & other_point) const
 template <typename Type>
 void Point3D<Type>::Show()
 {
-	Point2D::Show();
+	Point2D<Type>::Show();
 	std::cout << ',' << z;
 }
 
