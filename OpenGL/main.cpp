@@ -3,6 +3,7 @@
 #include"Point.h"
 #include"Point2D.h"
 #include"Point3D.h"
+#include"Line.h"
 
 namespace LinePoint {
 	Point2D<GLint> start;
@@ -10,6 +11,20 @@ namespace LinePoint {
 	const Point2D<GLint> size(400, 200);
 }
 
+template <typename Type>
+void CreateLine(const Point<Type> & start, const Point<Type> &end)
+{ 
+	void (* function)(Type, Type) = NULL;
+	switch (Type) {
+	case GLint:function = &glVertex2i; break;
+	case GLfloat:function = &glVertex2f; break;
+	case GLdouble:function = &glVertex2d; break;
+	}
+	glBegin(GL_LINES);
+	function(start.X(), start.Y());
+	function(end.X(), end.Y());
+	glEnd();
+}
 
 void Init()
 {
@@ -26,10 +41,6 @@ void Display()
 	for (int i = 0; i < 10; i++) {
 		start.SetPoint(size.X()/20*i, 0);
 		end.SetPoint(size.X()/2 - size.X() / 20 * i, size.Y());
-		glBegin(GL_LINES);
-		glVertex2i(start.X(), start.Y());
-		glVertex2i(end.X(), end.Y());
-		glEnd();
 	}
 	glFlush();
 }
