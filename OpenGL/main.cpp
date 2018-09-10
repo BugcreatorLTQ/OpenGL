@@ -1,11 +1,12 @@
 #include"Line2D.h"
-#include<vector>
 
 void InitWindows()
 {
+	const Point2D<GLint> size(800, 600);
+	const Point2D<GLint> posi(100, 100);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(800,600);
-	glutInitWindowPosition(40, 40);
+	glutInitWindowSize(size.X(), size.Y());
+	glutInitWindowPosition(posi.X(), posi.Y());
 	glutCreateWindow("demo");
 }
 
@@ -14,28 +15,18 @@ void Init()
 	glClearColor(0, 0, 0, 1);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0, 200, 2, 150);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(1, 1, 1);
 }
-
-
 
 void Display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	//for (GLint i = 0; i < 10; i++) {
-	//	glBegin(i);
-	//	for (GLint j = 0; j < 5; j++) {
-	//		GLfloat x, y;
-	//		x = j * 0.1f;
-	//		y = 1.0f - x;
-	//		glVertex2f(x,y);
-	//	}
-	//	glEnd();
-	//}
-	glColor4f(0.2, 0.6, 1.0, 1.0);		//图形绘制颜色
-	glRotatef(40.0, -40.0, -20.0, 1.0);	//设置旋转
-	glutWireTeapot(0.5);		//绘制线模型模式茶壶
+	typedef Point2D<GLint> Pt;
+	Line2D<GLint> line;
+	for (int i = 0; i < 10; i++) {
+		line.SetLine(Pt(0, 10 + i * 10), Pt(i * 10 + 10, 0));
+		line.Draw();
+	}
 	glFlush();
 }
 
@@ -48,4 +39,3 @@ int main(int argc, char *argv[])
 	glutMainLoop();
 	return 0;
 }
-

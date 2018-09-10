@@ -2,21 +2,20 @@
 #define LINE_H
 #include"Point.h"
 
-
 template <typename Type>
 class Line
 {
 private:
 	Point<Type> start;	//start point
 	Point<Type> end;	//end point
-public:
 	GLint Mod;		//line draw mod
+public:
 	Line();
 	virtual ~Line();
 	void SetLine(const Point<Type> & start_point, const Point<Type> & end_point);
 	bool operator==(const Line & other_line) const;
 	void Show() const;	//Show Line information in Control 
-	void SetMod(GLint mod);
+	void SetMod(GLint mod) { Mod = mod; };
 	GLint GetMod() const { return Mod; };
 };
 
@@ -58,12 +57,6 @@ void Line<Type>::Show() const
 	std::cout << "),(";
 	end.Show();
 	std::cout << ")]";
-}
-
-template <typename Type>
-void Line<Type>::SetMod(GLint mod)
-{
-	Mod = mod;
 }
 
 #endif
