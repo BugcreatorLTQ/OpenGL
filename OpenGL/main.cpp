@@ -3,11 +3,9 @@
 
 void InitWindows()
 {
-	const Point2D<GLint> size(800, 600);
-	const Point2D<GLint> posi(20, 20);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(size.X(), size.Y());
-	glutInitWindowPosition(posi.X(), posi.Y());
+	glutInitWindowSize(800,600);
+	glutInitWindowPosition(40, 40);
 	glutCreateWindow("demo");
 }
 
@@ -16,41 +14,28 @@ void Init()
 	glClearColor(0, 0, 0, 1);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0, 200, 2, 150);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1, 1, 1);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 
 
 void Display()
 {
-	typedef Point2D<GLint> Pt;
-	typedef Line2D<GLint> Le;
-	//points
-	Pt point;
-	for (int i = 0; i < 5; i++) {
-		point.SetPoint(1 + i, i + 1);
-		point.Draw();
-	}
-	//lines
-	Le line;
-	//line.SetMod(LINES);
-	for (int i = 0; i < 5; i++) {
-		line.SetLine(Pt(20, 20 + i * 3), Pt(0, i * 10));
-		line.Draw();
-	}
-	//line_stipple
-	line.SetMod(LINE_STIPPLE);
-	for (int i = 0; i < 5; i++) {
-		line.SetLine(Pt(0, i * 20), Pt(30 * i, 0));
-		line.Draw();
-	}
-	//line_loop
-	line.SetMod(LINE_LOOP);
-	for (int i = 0; i < 5; i++) {
-		line.SetLine(Pt(30 + i * 20, 0), Pt(0, i * 15));
-		line.Draw();
-	}
+	glClear(GL_COLOR_BUFFER_BIT);
+	//for (GLint i = 0; i < 10; i++) {
+	//	glBegin(i);
+	//	for (GLint j = 0; j < 5; j++) {
+	//		GLfloat x, y;
+	//		x = j * 0.1f;
+	//		y = 1.0f - x;
+	//		glVertex2f(x,y);
+	//	}
+	//	glEnd();
+	//}
+	glColor4f(0.2, 0.6, 1.0, 1.0);		//图形绘制颜色
+	glRotatef(40.0, -40.0, -20.0, 1.0);	//设置旋转
+	glutWireTeapot(0.5);		//绘制线模型模式茶壶
 	glFlush();
 }
 
@@ -63,3 +48,4 @@ int main(int argc, char *argv[])
 	glutMainLoop();
 	return 0;
 }
+

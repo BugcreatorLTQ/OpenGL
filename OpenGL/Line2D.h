@@ -10,7 +10,9 @@ class Line2D :public Line<Type>
 private:
 	Point2D<Type> start;
 	Point2D<Type> end;
+	GLint Mod;
 public:
+	friend void Display();
 	Line2D();
 	~Line2D();
 	void SetLine(const Point2D<Type> & start_point, const Point2D<Type> & end_point);
@@ -23,6 +25,7 @@ public:
 template <typename Type>
 Line2D<Type>::Line2D()
 {
+	Mod = GL_LINES;
 	start.SetPoint(0, 0);
 	end.SetPoint(0, 0);
 }
@@ -64,10 +67,10 @@ template <typename Type>
 void Line2D<Type>::Draw() const
 {
 	//only interge
-	glBegin(Line<Type>::GetMod());
+	//glBegin(Mod);
 	glVertex2i(start.X(), start.Y());
 	glVertex2i(end.X(), end.Y());
-	glEnd();
+	//glEnd();
 }
 
 #endif
