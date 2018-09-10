@@ -1,9 +1,12 @@
-#include<GL/glut.h>
+#include"Line2D.h"
 
 void InitWindows()
 {
-	glutInitWindowSize(800,600);
-	glutInitWindowPosition(20,20);
+	const Point2D<GLint> size(800, 600);
+	const Point2D<GLint> posi(100, 100);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(size.X(), size.Y());
+	glutInitWindowPosition(posi.X(), posi.Y());
 	glutCreateWindow("demo");
 }
 
@@ -12,18 +15,18 @@ void Init()
 	glClearColor(0, 0, 0, 1);
 	glMatrixMode(GL_PROJECTION);
 	gluOrtho2D(0, 200, 2, 150);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(1, 1, 1);
 }
 
 void Display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POLYGON);
-	glVertex2f(0.0, 0.0);
-	glVertex2f(0.0, 3.0);
-	glVertex2f(3.0, 3.0);
-	glVertex2f(4.0, 1.5);
-	glVertex2f(3.0, 0.0);
-	glEnd();
+	typedef Point2D<GLint> Pt;
+	Line2D<GLint> line;
+	for (int i = 0; i < 10; i++) {
+		line.SetLine(Pt(0, 10 + i * 10), Pt(i * 10 + 10, 0));
+		line.Draw();
+	}
 	glFlush();
 }
 
