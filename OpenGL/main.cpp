@@ -16,6 +16,8 @@ void InitWindows(void)
 void Init(void)
 {
 	glClearColor(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3d(0.0, 0.0, 0.0);	//Set Point Color	
 }
 
 void DisplayCircle()
@@ -26,8 +28,8 @@ void DisplayCircle()
 	glBegin(GL_LINES);
 	for (GLint i = 0; i < count; i++) {
 		Pt NewPoint = Circle<DataType>(i, count);
-		for (auto x : points) {
-			glVertex2f(x.x, x.y);
+		for (auto pt : points) {
+			glVertex2f(pt.x, pt.y);
 			glVertex2f(NewPoint.x, NewPoint.y);
 		}
 		points.push_back(NewPoint);
@@ -36,10 +38,22 @@ void DisplayCircle()
 	glFlush();
 }
 
+void Display_(void)
+{
+	glClearColor(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glPointSize(5.0);
+	for (GLint mod = 0; mod < 10; mod++) {
+		glBegin(mod);
+		for (GLint i = 0; i < 4; i++)
+			glVertex2d(-0.9 + mod * 0.17 + i * 0.05, 0.2*(i & 1));
+		glEnd();
+	}
+	glFlush();
+}
+
 void Display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3d(0.0, 1.0, 1.0);	//Set Point Color	
 	const GLint count = 10;
 	std::vector<point<DataType>> center;
 	glPointSize(4.0f);	//Set Point Size
@@ -67,7 +81,7 @@ int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
 	InitWindows();
-	glutDisplayFunc(DisplayCircle);
+	glutDisplayFunc(Display_);
 	Init();
 	glutMainLoop();
 	return 0;
