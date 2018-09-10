@@ -1,4 +1,7 @@
 #include<GL/glut.h>
+#include"MyTool.h"
+
+typedef GLfloat DataType;
 
 void InitWindows()
 {
@@ -10,19 +13,35 @@ void InitWindows()
 
 void Init()
 {
-	glClearColor(0, 0, 0, 1);
-	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0, 1000, 2, 1000);
+	glClearColor(1, 1, 1, 1);
 }
 
 void Display()
 {
+	const DataType size = 0.1f;
+	const GLint count = 10;
+	glPointSize(4.0f);
+	glLineWidth(2.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-	glPointSize(10);
-	for (GLint i = 100; i < 900; i++) {
-		glBegin(GL_POINTS);
-		glVertex2i(i,i);
+	glColor3d(0.0, 1.0, 1.0);	//Set Point Color
+	/*glBegin(GL_POINTS);
+	point<GLfloat> Pt;
+	for (int i = 0; i < 1000; i++) {
+		Pt = Circle<GLfloat>(i, 1000);
+		glVertex2i(Pt.x, Pt.y);
+		glVertex2i(Pt.x - size, Pt.y + size);
+	}
+	glEnd();*/
+	for (int i = 0; i < count; i++) {
+		glColor3f(i*0.1f, i*0.1f, 1-i*0.1f);	//Change Color
+		point<DataType> Pt = Circle<DataType>(i, count);	//Find Circle center
+		Pt *= 0.8f;	//Shorten the radius
+	glBegin(i);
+		glVertex2f(Pt.x, Pt.y);	//Draw five point around the Circle
+		glVertex2f(Pt.x - size, Pt.y);	
+		glVertex2f(Pt.x, Pt.y + size);
+		glVertex2f(Pt.x + size, Pt.y);
+		glVertex2f(Pt.x, Pt.y - size);
 		glEnd();
 	}
 	glFlush();
