@@ -18,6 +18,24 @@ void Init(void)
 	glClearColor(1, 1, 1, 1);
 }
 
+void DisplayCircle()
+{
+	typedef point<DataType> Pt;
+	std::vector<Pt> points;
+	const GLint count = 11;
+	glBegin(GL_LINES);
+	for (GLint i = 0; i < count; i++) {
+		Pt NewPoint = Circle<DataType>(i, count);
+		for (auto x : points) {
+			glVertex2f(x.x, x.y);
+			glVertex2f(NewPoint.x, NewPoint.y);
+		}
+		points.push_back(NewPoint);
+	}
+	glEnd();
+	glFlush();
+}
+
 void Display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -49,7 +67,7 @@ int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
 	InitWindows();
-	glutDisplayFunc(Display);
+	glutDisplayFunc(DisplayCircle);
 	Init();
 	glutMainLoop();
 	return 0;
