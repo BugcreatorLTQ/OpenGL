@@ -30,13 +30,13 @@ point<Type> point<Type>::operator*(const Type size) const
 }
 
 template<typename Type>
-Type point<Type>::operator*(const point & other) const
+Type point<Type>::operator*(const point<Type> & other) const
 {
 	return x * other.x + y * other.y;
 }
 
 template<typename Type>
-point<Type> & point<Type>::operator+=(const point & other)
+point<Type> & point<Type>::operator+=(const point<Type> & other)
 {
 	x += other.x;
 	y += other.y;
@@ -44,7 +44,7 @@ point<Type> & point<Type>::operator+=(const point & other)
 }
 
 template<typename Type>
-point<Type> point<Type>::operator+(const point & other) const
+point<Type> point<Type>::operator+(const point<Type> & other) const
 {
 	point temp = *this;
 	temp += other;
