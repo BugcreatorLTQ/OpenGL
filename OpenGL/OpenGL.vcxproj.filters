@@ -22,21 +22,4 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Point2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Point3D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Line2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>
