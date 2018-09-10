@@ -20,7 +20,8 @@ public:
 	Point2D operator+(const Point2D & other_point) const;
 	Point2D operator-(const Point2D & other_point) const;
 	Type operator*(const Point2D & other_point) const;
-	void Show();
+	void Show() const;
+	void Draw() const;
 };
 
 template <typename Type>
@@ -108,9 +109,17 @@ Type Point2D<Type>::operator*(const Point2D & other_point) const
 }
 
 template <typename Type>
-void Point2D<Type>::Show()
+void Point2D<Type>::Show() const
 {
 	std::cout << x << "," << y;
 }
 
+template <typename Type>
+void Point2D<Type>::Draw() const
+{
+	//only int
+	glBegin(GL_POINTS);
+	glVertex2i(x, y);
+	glEnd();
+}
 #endif
