@@ -1,15 +1,9 @@
 #include<GL/glut.h>
-#include<algorithm>
-#include<iostream>
 #include<vector>
 #include"MyTool.h"
 
 typedef GLfloat DataType;
 
-void Draw(const point<DataType> & Pt)
-{
-	glVertex2f(Pt.x, Pt.y);
-}
 
 void InitWindows(void)
 {
@@ -45,7 +39,8 @@ void Display(void)
 	}
 	glColor3i(0, 0, 0);		//Set Color Black
 	glBegin(GL_LINE_LOOP);
-	std::for_each(center.begin(), center.end(), Draw);	//Connect Center
+	for (auto & x : center)
+		glVertex2f(x.x, x.y);
 	glEnd();
 	glFlush();
 }
