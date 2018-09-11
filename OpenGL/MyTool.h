@@ -70,7 +70,7 @@ Type point<Type>::abs() const
 
 //---------------------------------Circle---------------------------------
 template<typename Type>
-point<Type> Circle(int this_count, int sum_count)
+point<Type> CirclePoint(int this_count, int sum_count)
 {
 	const Type PI = (Type)3.1415926;
 	if (sum_count <= 0)
