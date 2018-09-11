@@ -3,6 +3,7 @@
 
 #include<cmath>
 
+//---------------------------------point----------------------------------
 template<typename Type>
 struct point {
 	Type x, y;
@@ -13,6 +14,7 @@ struct point {
 	Type operator*(const point & other) const;
 	point & operator+=(const point & other);
 	point operator+(const point & other) const;
+	Type abs() const;
 };
 
 template<typename Type>
@@ -60,6 +62,13 @@ point<Type> point<Type>::operator+(const point<Type> & other) const
 	return temp;
 }
 
+template<typename Type>
+Type point<Type>::abs() const
+{
+	return sqrt(x * x + y * y);
+}
+
+//---------------------------------Circle---------------------------------
 template<typename Type>
 point<Type> Circle(int this_count, int sum_count)
 {
