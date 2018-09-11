@@ -4,13 +4,6 @@
 
 typedef GLfloat DataType;
 
-void Init(void)
-{
-	glClearColor(1, 1, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3d(0.0, 0.0, 0.0);	//Set Point Color	)
-}
-
 ///Windows
 namespace Windows {
 	const point<GLint> size(800, 800);
@@ -25,6 +18,9 @@ void Windows::Init(void)
 	glutInitWindowSize(size.x,size.y);
 	glutInitWindowPosition(position.x, position.y);
 	glutCreateWindow("OpenGL");
+	glClearColor(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3d(0.0, 0.0, 0.0);	//Set Point Color	)
 }
 
 ///LoopPoint
@@ -182,7 +178,6 @@ int main(int argc, char *argv[])
 	glutDisplayFunc(LoopPoint::Display);
 	glutMouseFunc(LoopPoint::MouseButton);
 	glutPassiveMotionFunc(LoopPoint::MouseMove);
-	Init();
 	glutMainLoop();
 	return 0;
 }
