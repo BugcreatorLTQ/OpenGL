@@ -6,12 +6,21 @@
 template<typename Type>
 struct point {
 	Type x, y;
+	point() { x = y = (Type)0; };
+	point(const Type x,const Type y);
 	point & operator*=(const Type size);
 	point operator*(const Type size) const;
 	Type operator*(const point & other) const;
 	point & operator+=(const point & other);
 	point operator+(const point & other) const;
 };
+
+template<typename Type>
+point<Type>::point(const Type x,const Type y)
+{
+	this->x = x;
+	this->y = y;
+}
 
 template<typename Type>
 point<Type> & point<Type>::operator*=(const Type size) 
