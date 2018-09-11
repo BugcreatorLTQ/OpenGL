@@ -34,7 +34,8 @@ namespace LoopPoint {
 	void ChangeStep(void);
 	GLboolean IsOk(void);
 	void Display(void);
-	void MouseButton(GLint button, GLint action, GLint x, GLint y);
+	void MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y);
+	void MouseMove(GLint mouse_x, GLint mouse_y);
 }
 
 void LoopPoint::ChangeStep(void)
@@ -59,7 +60,7 @@ void LoopPoint::Display(void)
 {
 	if (IsOk()) {
 		Pt += step;
-		Sleep(5);
+		Sleep(1);
 		glBegin(GL_POINTS);
 		glVertex2f(Pt.x, Pt.y);
 		glEnd();
@@ -70,17 +71,29 @@ void LoopPoint::Display(void)
 	glutPostRedisplay();
 }
 
-void LoopPoint::MouseButton(GLint button, GLint action, GLint x, GLint y)
+void LoopPoint::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
 {
 	using Windows::size;
 	if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN) {
 		point<DataType> Newstep;
-		Newstep.x = 2.0f*x / size.x - 1.0f - Pt.x;
-		Newstep.y = -2.0f*y / size.y + 1.0f - Pt.y;
+		Newstep.x = 2.0f*mouse_x / size.x - 1.0f - Pt.x;
+		Newstep.y = -2.0f*mouse_y / size.y + 1.0f - Pt.y;
 		Newstep *= 1 / Newstep.abs();	//turn to eye vector
 		step = Newstep * 0.01f;
 		glutPostRedisplay();
 	}
+}
+
+void LoopPoint::MouseMove(GLint mouse_x, GLint mouse_y)
+{
+	using Windows::size;
+	point<DataType> MPt;
+	MPt.x = 2.0f*mouse_x / size.x - 1.0f;
+	MPt.y = -2.0f*mouse_y / size.y + 1.0f;
+	glBegin(GL_POINTS);
+	glVertex2f(MPt.x, MPt.y);
+	glEnd();
+	glFlush();
 }
 
 ///R_Polygon
@@ -168,6 +181,7 @@ int main(int argc, char *argv[])
 	R_Polygon::SetCount(11);
 	glutDisplayFunc(LoopPoint::Display);
 	glutMouseFunc(LoopPoint::MouseButton);
+	glutPassiveMotionFunc(LoopPoint::MouseMove);
 	Init();
 	glutMainLoop();
 	return 0;
