@@ -23,12 +23,6 @@ namespace LoopPoint {
 	}
 }
 
-//--------------------------------Mouse-------------------------------
-namespace Mouse {
-	point<DataType> Pstart;
-	point<DataType> Pend;
-}
-
 //-------------------------------Windows------------------------------
 namespace Windows {
 	const point<GLint> size(800, 800);
@@ -80,29 +74,6 @@ void DisplayEasy(void)
 			glVertex2d(-0.9 + mod * 0.17 + i * 0.05, 0.2*(i & 1));
 		glEnd();
 	}
-	glFlush();
-}
-
-void MouseButton(GLint button,GLint action,GLint x,GLint y)
-{
-	using Windows::size;
-	using namespace Mouse;
-	if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN) {
-		Pstart = Pend;
-		Pend.x = 2.0f*x / size.x;
-		Pend.y = -2.0f*y / size.y;
-		Pend += point<DataType>(-1, 1);
-		glutPostRedisplay();
-	}
-}
-
-void DisplayMouse(void)
-{
-	using namespace Mouse;
-	glBegin(GL_LINES);
-	glVertex2f(Pstart.x, Pstart.y);
-	glVertex2f(Pend.x, Pend.y);
-	glEnd();
 	glFlush();
 }
 
