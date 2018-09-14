@@ -121,7 +121,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EasyPlot.h" />
+    <ClInclude Include="LoopPoint.h" />
     <ClInclude Include="MyTool.h" />
+    <ClInclude Include="Namespaces.h" />
+    <ClInclude Include="R_Polygon.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
