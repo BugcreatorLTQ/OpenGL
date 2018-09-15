@@ -3,6 +3,8 @@
 #include<GL/glut.h>
 #include<vector>
 #include"MyTool.h"
+
+
 typedef GLfloat DataType;
 
 ///R_Polygon

@@ -6,6 +6,7 @@ typedef GLfloat DataType;
 
 ///LoopPoint
 namespace LoopPoint {
+  bool MouseMoveFlag = false;
 	point<DataType> Pt;
 	point<DataType> step;
 	void ChangeStep(void);
@@ -13,6 +14,8 @@ namespace LoopPoint {
 	void Display(void);
 	void MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y);
 	void MouseMove(GLint mouse_x, GLint mouse_y);
+  void MouseMenu(int value);
+  void CreateMenu(void);
 }
 
 void LoopPoint::ChangeStep(void)
@@ -63,6 +66,8 @@ void LoopPoint::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mou
 
 void LoopPoint::MouseMove(GLint mouse_x, GLint mouse_y)
 {
+  if (MouseMoveFlag == false)
+    return;
 	using Window::size;
 	point<DataType> MPt;
 	MPt.x = 2.0f*mouse_x / size.x - 1.0f;
@@ -73,6 +78,21 @@ void LoopPoint::MouseMove(GLint mouse_x, GLint mouse_y)
 	glFlush();
 }
 
+void LoopPoint::MouseMenu(int value)
+{
+  switch (value) {
+  case 1:MouseMoveFlag = true; break;
+  case 2:MouseMoveFlag = false; break;
+  default:break;
+  }
+}
 
+void LoopPoint::CreateMenu(void)
+{
+  glutCreateMenu(LoopPoint::MouseMenu);
+  glutAddMenuEntry("ON", 1);
+  glutAddMenuEntry("OFF", 2);
+  glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
 
 #endif // !LOOPPOINT_H
