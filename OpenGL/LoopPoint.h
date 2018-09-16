@@ -47,7 +47,9 @@ void LoopPoint::Display(void)
 		glFlush();
 	}
 	else
-		ChangeStep();
+	  ChangeStep();
+  glutMouseFunc(LoopPoint::MouseButton);
+  glutPassiveMotionFunc(LoopPoint::MouseMove);
 	glutPostRedisplay();
 }
 
@@ -83,6 +85,7 @@ void LoopPoint::MouseMenu(int value)
   switch (value) {
   case 1:MouseMoveFlag = true; break;
   case 2:MouseMoveFlag = false; break;
+  case 3:step = point<DataType>(0, 0);
   default:break;
   }
 }
@@ -92,6 +95,7 @@ void LoopPoint::CreateMenu(void)
   glutCreateMenu(LoopPoint::MouseMenu);
   glutAddMenuEntry("ON", 1);
   glutAddMenuEntry("OFF", 2);
+  glutAddMenuEntry("Pause", 3);
   glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
