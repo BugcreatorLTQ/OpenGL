@@ -2,7 +2,8 @@
 #define R_POLYGON_H
 #include<GL/glut.h>
 #include<vector>
-#include"MyTool.h"
+#include"point.h"
+#include"Circle.h"
 
 
 typedef GLfloat DataType;

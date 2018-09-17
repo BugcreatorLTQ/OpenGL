@@ -23,9 +23,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyTool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Namespaces.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -45,6 +42,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

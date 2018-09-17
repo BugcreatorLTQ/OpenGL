@@ -1,7 +1,7 @@
 #ifndef LOOPPOINT_H
 #define LOOPPOINT_H
 #include<GL/glut.h>
-#include"MyTool.h"
+#include"point.h"
 typedef GLfloat DataType;
 
 ///LoopPoint

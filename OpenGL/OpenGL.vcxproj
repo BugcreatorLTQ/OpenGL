@@ -121,10 +121,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="EasyPlot.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LoopPoint.h" />
-    <ClInclude Include="MyTool.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Namespaces.h" />
     <ClInclude Include="R_Polygon.h" />
     <ClInclude Include="Test.h" />
