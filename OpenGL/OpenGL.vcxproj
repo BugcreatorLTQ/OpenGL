@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EasyPlot.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="LoopPoint.h" />
     <ClInclude Include="MyTool.h" />
     <ClInclude Include="Namespaces.h" />
