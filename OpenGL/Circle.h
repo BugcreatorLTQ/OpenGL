@@ -9,6 +9,8 @@ struct Circle {
   Type R;
   void Display();
   void CopyPoint(const point<Type> & now_point);
+  void MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y);
+  void MouseButtonMove(GLint mouse_x, GLint mouse_y);
 };
 
 void Circle::Display()
@@ -35,14 +37,38 @@ void Circle::CopyPoint(const point<Type> & now_point)
   glBegin(GL_POINTS);
   Type x = now_point.x, y = now_point.y;
   glVertex2i(Center.x + x, Center.y + y);
-  glVertex2i(Center.y + y, Center.x + x);
+  glVertex2i(Center.x + y, Center.y + x);
   glVertex2i(Center.x + x, Center.y - y);
-  glVertex2i(Center.y - y, Center.x + x);
+  glVertex2i(Center.x - y, Center.y + x);
   glVertex2i(Center.x - x, Center.y + y);
-  glVertex2i(Center.y + y, Center.x - x);
+  glVertex2i(Center.x + y, Center.y - x);
   glVertex2i(Center.x - x, Center.y - y);
-  glVertex2i(Center.y - y, Center.x - x);
+  glVertex2i(Center.x - y, Center.y - x);
   glEnd();
+}
+
+void Circle::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
+{
+  point<Type> mouse_posi(mouse_x, -mouse_y);
+  mouse_posi += point<Type>(-Window::size.x / 2, Window::size.y / 2);
+  if (button == GLUT_LEFT_BUTTON) {
+    if (action == GLUT_UP) {
+      this->R = (mouse_posi - Center).abs();
+    }
+    else {
+      this->Center = mouse_posi;
+    }
+  }
+}
+
+void Circle::MouseButtonMove(GLint mouse_x, GLint mouse_y)
+{
+  point<Type> now_point(mouse_x, -mouse_y);
+  now_point += point<Type>(-Window::size.x / 2, Window::size.y / 2);
+  this->R = (now_point - Center).abs();
+  glutPostRedisplay();
+  Circle::Display();
+  glutSwapBuffers();
 }
 
 #endif // !CIRCLE_H
