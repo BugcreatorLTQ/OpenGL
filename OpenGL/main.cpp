@@ -6,7 +6,6 @@ void Display()
   circle.Center.set(0, 0);
   circle.R = 100;
   circle.Display();
-  glFlush();
 }
 
 int main(int argc, char *argv[])

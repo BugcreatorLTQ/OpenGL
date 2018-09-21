@@ -19,14 +19,15 @@ void Circle::Display()
     Circle::CopyPoint(now_point);
     now_point.x++;
     if (e >= 0) {
-      e += 2 * (now_point.x - now_point.y) + 3;
       now_point.y -= 1;   //it's not my motion
+      e += 2 * (now_point.x - now_point.y) + 1;
     }
     else {
       e += 2 * now_point.x + 1;
     }
   } while (now_point.x <= now_point.y);
   Circle::CopyPoint(now_point);
+  glFlush();
 }
 
 void Circle::CopyPoint(const point<Type> & now_point)
