@@ -17,6 +17,7 @@ struct point {
 	point operator+(const point & other) const;
 	point & operator-=(const point & other);
 	point operator-(const point & other) const;
+  bool operator==(const point & other) const;
 	Type abs() const;
 };
 
@@ -85,6 +86,15 @@ point<Type> point<Type>::operator-(const point<Type> & other) const
   point<Type> temp = *this;
   temp -= other;
   return temp;
+}
+
+template<typename Type>
+bool point<Type>::operator==(const point<Type> & other) const
+{
+  if (this->x == other.x&&this->y == other.y)
+    return true;
+  else
+    return false;
 }
 
 #endif // !POINT_H

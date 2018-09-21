@@ -5,8 +5,8 @@
 
 ///Window
 namespace Window {
-	const point<GLint> size(800, 800);
-	const point<GLint> position(20, 20);
+  point<GLint> size(800, 600);
+  point<GLint> position(0, 0);
   GLint DisplayMode = GLUT_SINGLE;
 	void Init(void);
   void InitWin(void);
