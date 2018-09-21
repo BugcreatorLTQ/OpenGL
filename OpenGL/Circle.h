@@ -1,11 +1,17 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 #include"Point.h"
-//---------------------------------Circle---------------------------------
+
+typedef GLint Type;
+
+struct Circle {
+
+};
+
 template<typename Type>
 point<Type> CirclePoint(int this_count, int sum_count)
 {
-	const Type PI = (Type)3.1415926;
+  const Type PI = (Type)acos(-1.0);
 	if (sum_count <= 0)
 		throw"Count Error";
 	point<Type> Pt;

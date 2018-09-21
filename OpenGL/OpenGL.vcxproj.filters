@@ -29,13 +29,7 @@
     <ClInclude Include="LoopPoint.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="R_Polygon.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="EasyPlot.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Test.h">
