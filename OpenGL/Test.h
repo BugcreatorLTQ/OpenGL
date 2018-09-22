@@ -17,6 +17,7 @@ namespace Test {
   Line now_line;
   Circle now_circle;
   PlotMod plot_mod = T_LINE;
+  bool Flag = true;
 	void Display(void);
   void MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y);
   void MouseButtonMove(GLint mouse_x, GLint mouse_y);
@@ -61,6 +62,10 @@ void Test::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
 
 void Test::MouseButtonMove(GLint mouse_x, GLint mouse_y)
 {
+  if (Test::Flag == false) {
+    Test::Flag = true;
+    return;
+  }
   if (plot_mod == T_LINE)
     now_line.MouseButtonMove(mouse_x, mouse_y);
   else if (plot_mod == T_CIRCLE)
@@ -89,6 +94,7 @@ void Test::Show()
 
 void Test::ProcessMenu(int value)
 {
+  Test::Flag = false;
   switch (value)
   {
   case 1:
