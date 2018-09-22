@@ -95,8 +95,8 @@ void Line::MouseButtonMove(GLint mouse_x, GLint mouse_y)
   point<GLint> temp(mouse_x, -mouse_y);
   end = temp + point<Type>(-Window::size.x / 2, Window::size.y / 2);
   step = end - start;
-  glutPostRedisplay();
   Line::Display();
+  glutPostRedisplay();
   glutSwapBuffers();
 }
 

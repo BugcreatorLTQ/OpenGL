@@ -41,6 +41,13 @@ void Test::Display(void)
 
 void Test::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
 {
+  static bool Flag = true;
+  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN && Flag == true)
+    Flag = false;
+  else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP && Flag == false)
+    Flag = true;
+  else
+    return;
   if (plot_mod == T_LINE) {
     now_line.MouseButton(button, action, mouse_x, mouse_y);
     if (button == GLUT_LEFT_BUTTON && action == GLUT_UP) {
@@ -107,6 +114,8 @@ void Test::ProcessMenu(int value)
     lines.clear();
     circles.clear();
     glClear(GL_COLOR_BUFFER_BIT);
+    glutSwapBuffers();
+    Test::Display();
     break;
   default:
     break;

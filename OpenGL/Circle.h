@@ -21,7 +21,7 @@ void Circle::Display()
     Circle::CopyPoint(now_point);
     now_point.x++;
     if (e >= 0) {
-      now_point.y -= 1;   //it's not my motion
+      now_point.y -= 1;
       e += 2 * (now_point.x - now_point.y) + 1;
     }
     else {
@@ -66,8 +66,8 @@ void Circle::MouseButtonMove(GLint mouse_x, GLint mouse_y)
   point<Type> now_point(mouse_x, -mouse_y);
   now_point += point<Type>(-Window::size.x / 2, Window::size.y / 2);
   this->R = (now_point - Center).abs();
-  glutPostRedisplay();
   Circle::Display();
+  glutPostRedisplay();
   glutSwapBuffers();
 }
 
