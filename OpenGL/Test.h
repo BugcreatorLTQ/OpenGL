@@ -14,7 +14,8 @@ enum PlotMod { T_LINE, T_CIRCLE, T_FULL };
 namespace Test {
   std::vector<Line> lines;
   std::vector<Circle> circles;
-  std::vector<std::vector<GLbyte>> pixel;
+  std::vector<std::vector<GLint>> pixel;
+  GLint left_min, right_max, up_min, down_max;
   Line now_line;
   Circle now_circle;
   PlotMod plot_mod = T_LINE;
@@ -29,11 +30,14 @@ namespace Test {
   void InitPixelArray();
   void WirtePixel();
   void Full(GLint x, GLint y);
+  void Debug();
 }
 
 void Test::Display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    if (pixel.empty() == false)
+        Test::WirtePixel();
     for (auto line : lines) {
         line.Display();
     }
@@ -70,6 +74,8 @@ void Test::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
     }
     else if(plot_mod == T_FULL){
         Full(mouse_x, mouse_y);
+        glutSwapBuffers();
+        Test::Display();
     }
     glutPostRedisplay();
 }
@@ -120,6 +126,7 @@ void Test::ProcessMenu(int value)
     case 3:
         lines.clear();
         circles.clear();
+        pixel.clear();
         glClear(GL_COLOR_BUFFER_BIT);
         glutSwapBuffers();
         Test::Display();
@@ -144,7 +151,7 @@ void Test::CreateMenu()
 
 void Test::ReadPixel(GLint x, GLint y)
 {
-    x += Window::size.x / 2;
+    x = Window::size.x / 2 + x;
     y = Window::size.y / 2 - y;
     pixel[x][y] = 1;
 }
@@ -174,15 +181,15 @@ void Test::WirtePixel()
 {
     glColor3d(0.4, 0.2, 0.8);
     glBegin(GL_POINTS);
-    for (int i = 0; i < Window::size.x; i++)
-        for (int j = 0; j < Window::size.y; j++) {
+    for (int i = left_min; i < right_max; i++) {
+        for (int j = up_min; j < down_max; j++) {
             if (pixel[i][j] == 2)
                 glVertex2i(i - Window::size.x / 2, Window::size.y / 2 - j);
         }
-
+    }
     glEnd();
     glFlush();
-    Window::InitColor();
+    glColor3i(0, 0, 0);
 }
 
 void Test::Full(GLint x,GLint y)
@@ -191,46 +198,65 @@ void Test::Full(GLint x,GLint y)
     std::queue<point<GLint>> roots;
     point<GLint> temp(x, y);
     roots.push(temp);
+    right_max = down_max = 0;
+    left_min = Window::size.x;
+    up_min = Window::size.y;
     while (roots.empty() == false)
     {
-        temp = roots.back();
+        temp = roots.front();
         roots.pop();
         int x = temp.x, y = temp.y;
-        bool flag_up, flag_down;
-        flag_up = flag_down = true;
-        //move to left
-        while (pixel[x][y] == 0)
+        bool flag_left, flag_right;
+        flag_left = flag_right = true;
+        //move to top
+        while ((y >= 0) && (pixel[x][y] == 0))
             y--;
         y++;
+        if (y < up_min)
+            up_min = y;
         //foreach
-        while (pixel[x][y] == 0)
+        while ((y < Window::size.y) && (pixel[x][y] == 0))
         {
             pixel[x][y] = 2;
-            //up
-            if (flag_up ^ (pixel[x - 1][y] >= 1))
+            //left
+            if ((x > 0) && (flag_left ^ (pixel[x - 1][y] >= 1)))
             {
-                if (flag_up == true)
+                if (flag_left == true)
                 {
                     temp.set(x - 1, y);
                     roots.push(temp);
                 }
-                flag_up = !flag_up;
+                flag_left = !flag_left;
+                if (x - 1 < left_min)
+                    left_min = x - 1;
             }
-            //down
-            else if (flag_down ^ (pixel[x + 1][y] >= 1))
+            //right
+            if ((x < Window::size.x - 1) && (flag_right ^ (pixel[x + 1][y] >= 1)))
             {
-                if (flag_down == true)
+                if (flag_right == true)
                 {
                     temp.set(x + 1, y);
                     roots.push(temp);
                 }
-                flag_down = !flag_down;
+                flag_right = !flag_right;
+                if (x + 1 > right_max)
+                    right_max = x + 1;
             }
             y++;
         }
+        if (y > down_max)
+            down_max = y;
     }
-    Test::Display();
-    Test::WirtePixel();
+}
+
+void Test::Debug()
+{
+    for (int j = 0; j < Window::size.y; j++)
+    {
+        for (int i = 0; i < Window::size.x; i++)
+            std::cout << (GLint)pixel[i][j];
+        std::cout << std::endl;
+    }
 }
 
 #endif // TEST_H
