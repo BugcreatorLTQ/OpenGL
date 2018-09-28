@@ -6,19 +6,19 @@
 //---------------------------------point----------------------------------
 template<typename Type>
 struct point {
-	Type x, y;
-	point() { x = y = (Type)0; };
-	point(const Type x,const Type y);
-  void set(const Type x, const Type y) { this->x = x; this->y = y; };
-	point & operator*=(const Type size);
-	point operator*(const Type size) const;
-	Type operator*(const point & other) const;
-	point & operator+=(const point & other);
-	point operator+(const point & other) const;
-	point & operator-=(const point & other);
-	point operator-(const point & other) const;
-  bool operator==(const point & other) const;
-	Type abs() const;
+    Type x, y;
+    point() { x = y = (Type)0; };
+    point(const Type x, const Type y);
+    void set(const Type x, const Type y) { this->x = x; this->y = y; };
+    point & operator*=(const Type size);
+    point operator*(const Type size) const;
+    Type operator*(const point & other) const;
+    point & operator+=(const point & other);
+    point operator+(const point & other) const;
+    point & operator-=(const point & other);
+    point operator-(const point & other) const;
+    bool operator==(const point & other) const;
+    Type abs() const;
 };
 
 template<typename Type>
@@ -69,32 +69,32 @@ point<Type> point<Type>::operator+(const point<Type> & other) const
 template<typename Type>
 Type point<Type>::abs() const
 {
-  return (Type)sqrt(x * x + y * y);
+    return (Type)sqrt(x * x + y * y);
 }
 
 template<typename Type>
 point<Type> &  point<Type>::operator-=(const point<Type> & other)
 {
-  this->x -= other.x;
-  this->y -= other.y;
-  return *this;
+    this->x -= other.x;
+    this->y -= other.y;
+    return *this;
 }
 
 template<typename Type>
 point<Type> point<Type>::operator-(const point<Type> & other) const
 {
-  point<Type> temp = *this;
-  temp -= other;
-  return temp;
+    point<Type> temp = *this;
+    temp -= other;
+    return temp;
 }
 
 template<typename Type>
 bool point<Type>::operator==(const point<Type> & other) const
 {
-  if (this->x == other.x&&this->y == other.y)
-    return true;
-  else
-    return false;
+    if (this->x == other.x&&this->y == other.y)
+        return true;
+    else
+        return false;
 }
 
 #endif // !POINT_H
