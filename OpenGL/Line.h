@@ -47,19 +47,7 @@ void Line::Foreace(void(*fun)(GLint x, GLint y))
         return;
     point_step.x = (step.x == 0) ? 1 : step.x / e_step.x;
     point_step.y = (step.y == 0) ? 1 : step.y / e_step.y;
-    if (step.x == 0) {   // k is endless
-        do {
-            fun(now_point.x, now_point.y);
-            now_point.y += point_step.y;
-        } while (now_point.y != end.y);
-    }
-    else if (step.y == 0) {   //k is zero
-        do {
-            fun(now_point.x, now_point.y);
-            now_point.x += point_step.x;
-        } while (now_point.x != end.x);
-    }
-    else if (abs(step.y / step.x) == 0) {   // |k| < 1
+    if (abs(step.y) < abs(step.x)) {   // |k| < 1
         Type e = -e_step.x;
         do {
             fun(now_point.x, now_point.y);
@@ -104,12 +92,12 @@ void Line::MouseButton(GLint button, GLint action, GLint mouse_x, GLint mouse_y)
 
 void Line::MouseButtonMove(GLint mouse_x, GLint mouse_y)
 {
-  point<GLint> temp(mouse_x, -mouse_y);
-  end = temp + point<Type>(-Window::size.x / 2, Window::size.y / 2);
-  step = end - start;
-  Line::Display();
-  glutPostRedisplay();
-  glutSwapBuffers();
+    point<GLint> temp(mouse_x, -mouse_y);
+    end = temp + point<Type>(-Window::size.x / 2, Window::size.y / 2);
+    step = end - start;
+    Line::Display();
+    glutPostRedisplay();
+    glutSwapBuffers();
 }
 
 #endif // !LINE_H

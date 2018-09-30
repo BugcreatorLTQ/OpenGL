@@ -5,20 +5,20 @@
 
 ///Window
 namespace Window {
-  point<GLint> size(800, 600);
-  point<GLint> position(1000, 180);
-  GLint DisplayMode = GLUT_SINGLE;
-	void Init(void);
-  void InitWin(void);
-  void InitColor(void);
+    point<GLint> size(800, 600);
+    point<GLint> position(1000, 180);
+    GLint DisplayMode = GLUT_SINGLE;
+    void Init(void);
+    void InitWin(void);
+    void InitColor(void);
 }
 
 void Window::Init(void)
 {
-  glutInitDisplayMode(DisplayMode | GLUT_RGB);
-	glutInitWindowSize(size.x,size.y);
-	glutInitWindowPosition(position.x, position.y);
-	glutCreateWindow("OpenGL");
+    glutInitDisplayMode(DisplayMode | GLUT_RGB);
+    glutInitWindowSize(size.x, size.y);
+    glutInitWindowPosition(position.x, position.y);
+    glutCreateWindow("OpenGL");
 }
 
 void Window::InitColor(void)
@@ -30,7 +30,7 @@ void Window::InitColor(void)
 
 void Window::InitWin()
 {
-  glMatrixMode(GL_PROJECTION);
+  glMatrixMode(GL_PROJECTION); 
   gluOrtho2D(-size.x / 2, size.x / 2, -size.y / 2, size.y / 2);
 }
 
