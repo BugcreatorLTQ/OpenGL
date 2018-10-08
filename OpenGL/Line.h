@@ -43,8 +43,6 @@ void Line::Foreace(void(*fun)(GLint x, GLint y))
     point<Type> e_step, point_step;
     e_step.x = abs(step.x);
     e_step.y = abs(step.y);
-    if (step.x == 0 && step.y == 0) //No Step
-        return;
     point_step.x = (step.x == 0) ? 1 : step.x / e_step.x;
     point_step.y = (step.y == 0) ? 1 : step.y / e_step.y;
     if (abs(step.y) < abs(step.x)) {   // |k| < 1
