@@ -12,7 +12,7 @@ float angle_sun_self;
 float angle_earth;
 float angle_earth_self;
 float angle_moon;
-float radius_sun_earth = 5;
+float radius_sun_earth = 7;
 float radius_earth_moon = 1;
 float radius_sun = 1;
 float radius_earth = 0.5;
@@ -41,7 +41,7 @@ void renderScene(void) {
     glPushMatrix();
     //太阳绘制
 
-    glRotatef(angle_sun_self, 0.0, 1.0, 0.0);   //太阳自转，绘制实心球体，半径1.5,横向分割20份,纵向分割20份
+    glRotatef(angle_sun_self, 0.0, 1.0, 0.0);   //太阳自转
 
     glutWireSphere(radius_sun,20,20);    //太阳球体绘制
 
@@ -64,19 +64,20 @@ void renderScene(void) {
     glPopMatrix();
     //地球绘制_2
 
-    glRotatef(angle_earth_self, 0.0, 1.0, 0.0); //地球自转，绘制实心球体，半径1.5,横向分割20份,纵向分割20份
+    glRotatef(angle_earth_self, 0.0, 1.0, 0.0); //地球自转
 
-    glutWireSphere(radius_earth, 25, 25);   //地球球体绘制 
+    glutWireSphere(radius_earth, 10, 10);   //地球球体绘制 
 
 
     // 交换缓冲区 
     glutSwapBuffers();
     // 让angle自动增加。 
     //改变转动角度
-    angle_sun_self += 0.1f;
-    angle_earth += 0.3f;
-    angle_earth_self += 0.5f;
-    angle_moon += 0.3f;
+    const float k = 50;    //k为调整转速的参数
+    angle_sun_self += k/24;
+    angle_earth += k/365;
+    angle_earth_self += k/1;
+    angle_moon += k/30;
 
 }
 
